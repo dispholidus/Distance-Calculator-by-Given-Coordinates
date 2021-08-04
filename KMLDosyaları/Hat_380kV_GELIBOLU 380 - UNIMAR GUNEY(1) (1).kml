@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Hat_380kV_GELIBOLU 380 - UNIMAR GUNEY(1).kml</name>
+	<Style id="default0">
+		<LineStyle>
+			<color>ff0000ff</color>
+			<width>3</width>
+		</LineStyle>
+	</Style>
+	<Style id="hl">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+		<LineStyle>
+			<color>ff0000ff</color>
+			<width>3</width>
+		</LineStyle>
+	</Style>
+	<StyleMap id="default">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#default0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark id="Hat.fid-32a11066_16f47389167_-1e27" xsi:schemaLocation="http://www.opengis.net/kml/2.2 https://developers.google.com/kml/schema/kml22gx.xsd">
+		<name>Hat_380kV_GELIBOLU 380 - UNIMAR GUNEY(1).kml</name>
+		<styleUrl>#default</styleUrl>
+		<ExtendedData>
+			<Data name="AsamaID">
+			</Data>
+			<Data name="BolgeMudurlukAdi">
+				<value>2. BÖLGE MÜDÜRLÜĞÜ</value>
+			</Data>
+			<Data name="DOM">
+			</Data>
+			<Data name="ID">
+				<value>145</value>
+			</Data>
+			<Data name="ProjeID">
+			</Data>
+			<Data name="aciklama">
+			</Data>
+			<Data name="altkur">
+			</Data>
+			<Data name="altkur_id">
+				<value>999</value>
+			</Data>
+			<Data name="bolge">
+				<value>2</value>
+			</Data>
+			<Data name="domproj">
+				<value>-</value>
+			</Data>
+			<Data name="editleyen">
+			</Data>
+			<Data name="edittar">
+			</Data>
+			<Data name="gerilim">
+				<value>1</value>
+			</Data>
+			<Data name="gunceltar">
+				<value>2019-05-21T10:33:22.183Z</value>
+			</Data>
+			<Data name="hat_id">
+				<value>2-106</value>
+			</Data>
+			<Data name="hatadi">
+				<value>380kV_GELIBOLU 380 - UNIMAR GUNEY</value>
+			</Data>
+			<Data name="hatno">
+				<value>106</value>
+			</Data>
+			<Data name="hatozel">
+				<value>Yüksek Gerilim İletim Hattı</value>
+			</Data>
+			<Data name="hatozel_id">
+				<value>3</value>
+			</Data>
+			<Data name="hattip">
+				<value>Enerji İletim Hattı</value>
+			</Data>
+			<Data name="hattip_id">
+				<value>2</value>
+			</Data>
+			<Data name="ikzkure">
+			</Data>
+			<Data name="ikzkure_id">
+				<value>0</value>
+			</Data>
+			<Data name="kayittar">
+				<value>2019-05-21T10:33:22.183Z</value>
+			</Data>
+			<Data name="kayityap">
+				<value>Belsis</value>
+			</Data>
+			<Data name="rapkur">
+				<value>Türkiye Elektrik İletim Anonim Şirketi (TEİAŞ) Genel Müdürlüğü</value>
+			</Data>
+			<Data name="rapkur_id">
+				<value>7</value>
+			</Data>
+			<Data name="teskur">
+				<value>Türkiye Elektrik İletim Anonim Şirketi (TEİAŞ) Genel Müdürlüğü</value>
+			</Data>
+			<Data name="teskur_id">
+				<value>7</value>
+			</Data>
+			<Data name="uzunluk">
+			</Data>
+		</ExtendedData>
+		<MultiGeometry>
+			<LineString>
+				<coordinates>
+					26.66906364200004,40.46568157700008,0 26.67284147900003,40.47130846300007,0 26.69422069500004,40.4824824080001,0 26.73724940300011,40.49172518800003,0 26.74225890900006,40.49528247700008,0 26.77731952800009,40.51019944600006,0 26.81098196400008,40.54445435200003,0 26.83206229900006,40.55920623100005,0 26.83440250700006,40.5662361550001,0 26.83817423400004,40.56900326500005,0 26.84760262400004,40.57115558300004,0 26.85044738400005,40.57091982700004,0 26.85632990700005,40.57378859400009,0 26.85960515300011,40.57503825400008,0 26.86179879300008,40.57939154800005,0 26.86634399300005,40.58338479600008,0 26.87322329800004,40.60921491600007,0 26.88121762000005,40.61393786400004,0 26.88511937100004,40.61612858400008,0 26.88934367000006,40.61873736200005,0 26.92123248700005,40.63755970900007,0 26.973180687,40.65533809000002,0 27.02781064800011,40.67399883200005,0 27.04805247200006,40.68890944200004,0 27.121708106,40.73451441800009,0 27.14755385900001,40.77221879300004,0 27.17574016300006,40.81328208000005,0 27.21927607800007,40.83730231100003,0 27.23706348400004,40.85168145200007,0 27.27240079299999,40.86398664400005,0 27.30692917100002,40.88834891700006,0 27.33836092500011,40.92945893600003,0 27.35148166000008,40.94082046200006,0 27.35458866200004,40.94282682100007,0 27.35680259400004,40.94542643600005,0 27.4138245770001,40.99473039100008,0 27.42978253600002,41.00318250800004,0 27.48432575700006,41.04365456200006,0 27.56797026700003,41.07508199800003,0 27.64553564400004,41.06087831800008,0 27.6516059780001,41.06176002700002,0 27.72522212000004,41.07289446400003,0 27.7294775930001,41.07329402200006,0 27.7705240070001,41.06172774100006,0 27.79920619800005,41.06116433100004,0 27.80384196100006,41.06089274700003,0 27.80800606700007,41.06098036700004,0 27.81818347600003,41.06078769700008,0 27.82054794000003,41.06051309200007,0 27.82522011900008,41.060647214,0 27.83335746400009,41.06048432200001,0 27.85634150400006,41.06403952100004,0 27.90893385600006,41.05125410200009,0 27.91330336600001,41.0461052280001,0 27.93728599600006,41.00993884900007,0 27.93971779800006,41.00783301300007,0 27.94296149100007,41.007387894,0 27.94967193100008,41.00622076000011,0 27.954396714,41.00615142800004,0 27.95709824600007,41.00682803600006,0 27.95911811400008,41.00714916800007,0 27.96161867200009,41.00744095700006,0 27.96767044600004,41.00770410100009,0 27.96885672500005,41.00817872700006,0 27.97058352500003,41.00856879700007,0 
+				</coordinates>
+			</LineString>
+		</MultiGeometry>
+	</Placemark>
+</Document>
+</kml>

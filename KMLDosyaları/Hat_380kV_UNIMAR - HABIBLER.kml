@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Hat_380kV_UNIMAR - HABIBLER.kml</name>
+	<Style id="default0">
+		<LineStyle>
+			<color>ff0000ff</color>
+			<width>3</width>
+		</LineStyle>
+	</Style>
+	<Style id="hl">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+		<LineStyle>
+			<color>ff0000ff</color>
+			<width>3</width>
+		</LineStyle>
+	</Style>
+	<StyleMap id="default">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#default0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark id="Hat.fid-32a11066_16f47389167_1381" xsi:schemaLocation="http://www.opengis.net/kml/2.2 https://developers.google.com/kml/schema/kml22gx.xsd">
+		<name>Hat_380kV_UNIMAR - HABIBLER.kml</name>
+		<styleUrl>#default</styleUrl>
+		<ExtendedData>
+			<Data name="AsamaID">
+			</Data>
+			<Data name="BolgeMudurlukAdi">
+				<value>20. BÖLGE MÜDÜRLÜĞÜ</value>
+			</Data>
+			<Data name="DOM">
+			</Data>
+			<Data name="ID">
+				<value>1734</value>
+			</Data>
+			<Data name="ProjeID">
+			</Data>
+			<Data name="aciklama">
+			</Data>
+			<Data name="altkur">
+			</Data>
+			<Data name="altkur_id">
+				<value>999</value>
+			</Data>
+			<Data name="bolge">
+				<value>20</value>
+			</Data>
+			<Data name="domproj">
+				<value>-</value>
+			</Data>
+			<Data name="editleyen">
+			</Data>
+			<Data name="edittar">
+			</Data>
+			<Data name="gerilim">
+				<value>1</value>
+			</Data>
+			<Data name="gunceltar">
+				<value>2019-05-21T10:33:22.183Z</value>
+			</Data>
+			<Data name="hat_id">
+				<value>20-10</value>
+			</Data>
+			<Data name="hatadi">
+				<value>380kV_UNIMAR - HABIBLER</value>
+			</Data>
+			<Data name="hatno">
+				<value>10</value>
+			</Data>
+			<Data name="hatozel">
+				<value>Yüksek Gerilim İletim Hattı</value>
+			</Data>
+			<Data name="hatozel_id">
+				<value>3</value>
+			</Data>
+			<Data name="hattip">
+				<value>Enerji İletim Hattı</value>
+			</Data>
+			<Data name="hattip_id">
+				<value>2</value>
+			</Data>
+			<Data name="ikzkure">
+			</Data>
+			<Data name="ikzkure_id">
+				<value>0</value>
+			</Data>
+			<Data name="kayittar">
+				<value>2019-05-21T10:33:22.183Z</value>
+			</Data>
+			<Data name="kayityap">
+				<value>Belsis</value>
+			</Data>
+			<Data name="rapkur">
+				<value>Türkiye Elektrik İletim Anonim Şirketi (TEİAŞ) Genel Müdürlüğü</value>
+			</Data>
+			<Data name="rapkur_id">
+				<value>7</value>
+			</Data>
+			<Data name="teskur">
+				<value>Türkiye Elektrik İletim Anonim Şirketi (TEİAŞ) Genel Müdürlüğü</value>
+			</Data>
+			<Data name="teskur_id">
+				<value>7</value>
+			</Data>
+			<Data name="uzunluk">
+			</Data>
+		</ExtendedData>
+		<MultiGeometry>
+			<LineString>
+				<coordinates>
+					27.97179974900012,41.01015763400005,0 27.971595721,41.01374575200009,0 27.99269960900002,41.03618901200008,0 27.99506994500012,41.03874071000007,0 28.02835566700006,41.07411010000007,0 28.03154939500003,41.07479954500005,0 28.04837390400006,41.07920286700002,0 28.05485739600004,41.082888118,0 28.0583214050001,41.08448555700005,0 28.06853206100006,41.08538863800001,0 28.07241700300005,41.08651738399999,0 28.07989452100006,41.08744763200005,0 28.15201258700011,41.09276321300007,0 28.20838158800006,41.09687710200006,0 28.22506420400006,41.09711490000004,0 28.23140134900003,41.09783892300001,0 28.243339658,41.09737377400003,0 28.32186182700006,41.098454761,0 28.35247218400006,41.10532578000004,0 28.40258503700008,41.12550683900008,0 28.432407212,41.14060859200004,0 28.44939946700001,41.14664595100007,0 
+				</coordinates>
+			</LineString>
+		</MultiGeometry>
+	</Placemark>
+</Document>
+</kml>

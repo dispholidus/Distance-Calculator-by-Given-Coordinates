@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Document>
+	<name>Hat_380kV_GELIBOLU 380 - UNIMAR KUZEY.kml</name>
+	<Style id="default0">
+		<LineStyle>
+			<color>ff0000ff</color>
+			<width>3</width>
+		</LineStyle>
+	</Style>
+	<StyleMap id="default">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#default0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="hl">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+		<LineStyle>
+			<color>ff0000ff</color>
+			<width>3</width>
+		</LineStyle>
+	</Style>
+	<Placemark id="Hat.fid-32a11066_16f47389167_-1165" xsi:schemaLocation="http://www.opengis.net/kml/2.2 https://developers.google.com/kml/schema/kml22gx.xsd">
+		<name>Hat_380kV_GELIBOLU 380 - UNIMAR KUZEY.kml</name>
+		<LookAt>
+			<longitude>27.7407459975879</longitude>
+			<latitude>41.07755250474607</latitude>
+			<altitude>0</altitude>
+			<heading>1.040287062090027</heading>
+			<tilt>28.12784094157281</tilt>
+			<range>8633.602485645579</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#default</styleUrl>
+		<ExtendedData>
+			<Data name="AsamaID">
+			</Data>
+			<Data name="BolgeMudurlukAdi">
+				<value>2. BÖLGE MÜDÜRLÜĞÜ</value>
+			</Data>
+			<Data name="DOM">
+			</Data>
+			<Data name="ID">
+				<value>1667</value>
+			</Data>
+			<Data name="ProjeID">
+			</Data>
+			<Data name="aciklama">
+			</Data>
+			<Data name="altkur">
+			</Data>
+			<Data name="altkur_id">
+				<value>999</value>
+			</Data>
+			<Data name="bolge">
+				<value>2</value>
+			</Data>
+			<Data name="domproj">
+				<value>-</value>
+			</Data>
+			<Data name="editleyen">
+			</Data>
+			<Data name="edittar">
+			</Data>
+			<Data name="gerilim">
+				<value>1</value>
+			</Data>
+			<Data name="gunceltar">
+				<value>2019-05-21T10:33:22.183Z</value>
+			</Data>
+			<Data name="hat_id">
+				<value>2-107</value>
+			</Data>
+			<Data name="hatadi">
+				<value>380kV_GELIBOLU 380 - UNIMAR KUZEY</value>
+			</Data>
+			<Data name="hatno">
+				<value>107</value>
+			</Data>
+			<Data name="hatozel">
+				<value>Yüksek Gerilim İletim Hattı</value>
+			</Data>
+			<Data name="hatozel_id">
+				<value>3</value>
+			</Data>
+			<Data name="hattip">
+				<value>Enerji İletim Hattı</value>
+			</Data>
+			<Data name="hattip_id">
+				<value>2</value>
+			</Data>
+			<Data name="ikzkure">
+			</Data>
+			<Data name="ikzkure_id">
+				<value>0</value>
+			</Data>
+			<Data name="kayittar">
+				<value>2019-05-21T10:33:22.183Z</value>
+			</Data>
+			<Data name="kayityap">
+				<value>Belsis</value>
+			</Data>
+			<Data name="rapkur">
+				<value>Türkiye Elektrik İletim Anonim Şirketi (TEİAŞ) Genel Müdürlüğü</value>
+			</Data>
+			<Data name="rapkur_id">
+				<value>7</value>
+			</Data>
+			<Data name="teskur">
+				<value>Türkiye Elektrik İletim Anonim Şirketi (TEİAŞ) Genel Müdürlüğü</value>
+			</Data>
+			<Data name="teskur_id">
+				<value>7</value>
+			</Data>
+			<Data name="uzunluk">
+			</Data>
+		</ExtendedData>
+		<gx:balloonVisibility>1</gx:balloonVisibility>
+		<MultiGeometry>
+			<LineString>
+				<coordinates>26.66879970800006,40.46598057400004,0 26.67121101900002,40.47122653800008,0 26.69384016400005,40.48305396300003,0 26.73683620200007,40.49227655600001,0 26.74164965200008,40.495730106,0 26.74803421100008,40.49845345200004,0 26.7531626420001,40.50203502400004,0 26.75761202100004,40.50253780800006,0 26.77649088300007,40.51058477800007,0 26.81030628700008,40.54484747800009,0 26.83127605900007,40.5595423770001,0 26.83368136600006,40.56615838400006,0 26.83777808600004,40.56956142000007,0 26.84753752100002,40.57160518500007,0 26.85056767599999,40.57139979900006,0 26.85244113900008,40.57251129700006,0 26.8564014620001,40.57420178100006,0 26.85916093000002,40.57534450600011,0 26.86114903700008,40.57984508700011,0 26.865188813,40.58333029900004,0 26.87247269800003,40.60959000600008,0 26.8756574110001,40.61234529400011,0 26.88020767300004,40.61595957500006,0 26.89021246800003,40.62006344200009,0 26.91843484200006,40.63671344800011,0 26.92248922000002,40.63869192800004,0 26.97360696900004,40.65618354900002,0 27.027 5368800006,40.67454048600004,0 27.04734224100001,40.68927846900007,0 27.12107458900008,40.73494358300013,0 27.14768998900009,40.77377606200002,0 27.17510104300002,40.81371533200007,0 27.21885295900002,40.83785556300003,0 27.23677592400006,40.85403089200003,0 27.27192442299999,40.86452640700006,0 27.30624249600002,40.88872933900009,0 27.33751421500002,40.92970152100006,0 27.37627426400009,40.96329516700007,0 27.41304763400005,40.99512305000005,0 27.42920578900007,41.00364915600005,0 27.45273750800007,41.02117663200002,0 27.45599814100004,41.02348010200004,0 27.4588400850001,41.02572323900012,0 27.48370261200006,41.04424907800001,0 27.50805651500008,41.05338758100007,0 27.51021016700003,41.05435612200009,0 27.51445157100003,41.05578594000008,0 27.56816902700003,41.07591086700006,0 27.64564569500003,41.061476075,0 27.72903740100002,41.07408006400004,0 27.77101280600001,41.06224412400005,0 27.80873101900007,41.06216337700008,0 27.81696272100006,41.06250401700004,0 27.82075276400012,41.06125384900005,0 27.83308801900006,41.06111214700007,0 27.85638284599999,41.06468132200007,0 27.86985462000006,41.06140718300003,0 27.87539812300005,41.06009837200003,0 27.8789149180001,41.05920402800007,0 27.90916097700008,41.05184301300008,0 27.91412749900004,41.04621516700004,0 27.93748220599998,41.01099473500005,0 27.94006533100003,41.00835892800009,0 27.94411312700008,41.00774261100005,0 27.94931404300009,41.00663108900008,0 27.95428602700006,41.00654594400001,0 27.95693033100005,41.00720968500008,0 27.95899604100007,41.00753631100011,0 27.96153488500004,41.00783498200011,0 27.96740009399999,41.00808876800002,0 27.96957049800002,41.00979425000003,0 27.97064713900005,41.0134678930001,0 27.97093670000002,41.01385100000007,0</coordinates>
+			</LineString>
+		</MultiGeometry>
+	</Placemark>
+</Document>
+</kml>
