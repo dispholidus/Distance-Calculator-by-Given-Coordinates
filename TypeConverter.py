@@ -1,4 +1,5 @@
 class TypeConverter:
+
     @staticmethod
     def stringListtoFloatList(stringList):
         floatList = []
