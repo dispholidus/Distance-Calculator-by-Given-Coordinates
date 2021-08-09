@@ -6,14 +6,13 @@ from TypeConverter import *
 
 
 class Main:
-    LATITUDE_DISTANCE = 111
-    line = [0, 0, 0, 0]
     distance = 0
     floatList0 = []
     floatList1 = []
     kml_files = []
     roots = []
     coordinates = []
+    checkpoints = []
 
     def __init__(self):
         self.kml_files.append(path.join("KMLDosyaları/Hat_380kV_GELIBOLU 380 - UNIMAR KUZEY.kml"))
@@ -27,13 +26,27 @@ class Main:
             self.roots.append(ReadKml.read(k))
         for r in self.roots:
             self.coordinates.append(TypeConverter.stringListtoFloatList(str(r.Document.Placemark.MultiGeometry.LineString.coordinates).split(" ")))
+        for c in self.coordinates:
+            self.checkpoints.append(self.find_checkpoints(c))
+        print()
 
-        x_distance = Calculator.find_x_distance(self.coordinates[0][0], self.coordinates[0][1], 10)
-        x_degree = self.coordinates[0][0][0] + Calculator.meter_to_degree(Calculator.calc_longtitude_distance(self.coordinates[0][0][1]), x_distance)
-        y_degree = Calculator.find_latitude(x_degree, self.coordinates[0][0], self.coordinates[0][1])
-        print(str(x_distance) + "\n" + str(x_degree) + "\n" + str(y_degree))
-        self.distance = Calculator.haversine_algorithm(self.coordinates[0][0], [x_degree, y_degree])
-        print(self.distance)
+    @staticmethod
+    def find_checkpoints(coordinates):
+        temp_list = []
+        checkpoint_distance = 1
+        j = 0
+        checkpoint = coordinates[0]
+        while j+1 < len(coordinates):
+            if Calculator.haversine_algorithm(checkpoint, coordinates[j+1]) >= checkpoint_distance:
+                checkpoint = Calculator.find_second_point(checkpoint, Calculator.calculate_bearing(checkpoint, coordinates[j+1]), checkpoint_distance)
+                checkpoint.append(j)
+                checkpoint_distance = 1
+                temp_list.append(checkpoint)
+            else:
+                checkpoint_distance = checkpoint_distance - Calculator.haversine_algorithm(checkpoint, coordinates[j+1])
+                checkpoint = coordinates[j+1]
+                j = j+1
+        return temp_list
 
 
 if __name__ == "__main__":
