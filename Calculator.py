@@ -33,7 +33,7 @@ class Calculator:
         return math.degrees(radian_brng)
 
     @staticmethod
-    def find_second_point(point, bearing, distance):
+    def findcheckpoint(point, bearing, distance):
         second_point = [0, 0]
         x = math.radians(point[0])
         y = math.radians(point[1])
@@ -61,3 +61,16 @@ class Calculator:
         distance = abs(math.asin(math.sin(startToCheckpointD) * math.sin(startToCheckpointB - startToEndB)))
 
         return distance * Calculator.WORLD_RADIUS*1000
+
+    @staticmethod
+    def find_second_point(lineSegment):
+        rotatedPoints = []
+        longtitude_distance = ((2 * math.pi * Calculator.WORLD_RADIUS) * math.cos(
+            math.radians(lineSegment.startPoint[1]))) / 360
+        for cp in lineSegment.checkpoints:
+            tempPoint = Calculator.findcheckpoint(cp, lineSegment.bearing, 1)
+            x = abs(tempPoint[0] - cp[0]) * longtitude_distance
+            y = abs(tempPoint[1] - cp[1]) * 111
+            rotatedPoint = [cp[0] + y / longtitude_distance, cp[1] - x / 111]
+            rotatedPoints.append(rotatedPoint)
+

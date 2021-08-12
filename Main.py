@@ -40,11 +40,6 @@ class Main:
             self.segmentList.append(tempList)
         for c in self.segmentList:
             self.checkpoints.append(self.find_checkpoints(c))
-        # checkpoint = ccalc.find_checkpoint(self.coordinateList[0][1], self.coordinateList[0][2], 1)
-        # print("Kartezyen " + str(checkpoint))
-        # print("2. Nokta = " + str(
-        #    ccalc.find_second_point(self.coordinateList[0][1], self.checkpoints[0][0], self.coordinateList[1][1],
-        #                            self.coordinateList[1][2])))
 
     @staticmethod
     def find_checkpoints(coordinates):
@@ -54,10 +49,11 @@ class Main:
         checkpoint = coordinates[0].startPoint
         while j < len(coordinates):
             if calc.haversine_algorithm(checkpoint, coordinates[j].endPoint) >= checkpoint_distance:
-                checkpoint = calc.find_second_point(checkpoint,
-                                                    calc.calculate_bearing(checkpoint, coordinates[j].endPoint),
-                                                    checkpoint_distance)
+                checkpoint = calc.findcheckpoint(checkpoint,
+                                                 calc.calculate_bearing(checkpoint, coordinates[j].endPoint),
+                                                 checkpoint_distance)
                 checkpoint_distance = 1
+                coordinates[j].checkpoints.append(checkpoint)
                 temp_list.append(checkpoint)
             else:
                 checkpoint_distance = checkpoint_distance - calc.haversine_algorithm(checkpoint,
