@@ -1,9 +1,10 @@
 from os import path
 
 from ReadKml import *
-from Calculator import *
+from Calculator import Calculator as calc
 from TypeConverter import *
-from CartesianCalculator import *
+from CartesianCalculator import CartesianCalculator as ccalc
+from LineSegment import LineSegment
 
 
 class Main:
@@ -12,7 +13,8 @@ class Main:
     floatList1 = []
     kml_files = []
     roots = []
-    coordinates = []
+    coordinateList = []
+    segmentList = []
     checkpoints = []
 
     def __init__(self):
@@ -26,40 +28,41 @@ class Main:
         for k in self.kml_files:
             self.roots.append(ReadKml.read(k))
         for r in self.roots:
-            self.coordinates.append(TypeConverter.stringListtoFloatList(
-                str(r.Document.Placemark.MultiGeometry.LineString.coordinates).split(" ")))
-        for c in self.coordinates:
+            self.coordinateList.append(TypeConverter.stringListtoFloatList(str(r.Document.Placemark.MultiGeometry.LineString.coordinates).split(" ")))
+        for c in self.coordinateList:
+            tempList = []
+            for index, elem in enumerate(c):
+                if index + 1 < len(c):
+                    thisElem = c[index]
+                    nextElem = c[index + 1]
+                    obj = LineSegment(thisElem, nextElem)
+                    tempList.append(obj)
+            self.segmentList.append(tempList)
+        for c in self.segmentList:
             self.checkpoints.append(self.find_checkpoints(c))
-        print("Kartezyen Mesafe " + str(
-            CartesianCalculator.calculate_distance(self.coordinates[0][0], self.coordinates[0][1])))
-        print("Coğrafi Mesafe " + str(Calculator.haversine_algorithm(self.coordinates[0][0], self.coordinates[0][1])))
-        print("Kartezyen " + str(
-            CartesianCalculator.find_second_point(self.coordinates[0][0], self.coordinates[0][1], 1)))
-        print("Coğrafi " + str(Calculator.find_second_point(self.coordinates[0][0],
-                                                            Calculator.calculate_bearing(self.coordinates[0][0],
-                                                                                         self.coordinates[0][1]), 1)))
-        print("Hata payı = " + str((Calculator.haversine_algorithm(self.coordinates[0][0], self.coordinates[0][1])
-                                    - CartesianCalculator.calculate_distance(self.coordinates[0][0], self.coordinates[0][1]))
-                                   / Calculator.haversine_algorithm(self.coordinates[0][0], self.coordinates[0][1])))
+        # checkpoint = ccalc.find_checkpoint(self.coordinateList[0][1], self.coordinateList[0][2], 1)
+        # print("Kartezyen " + str(checkpoint))
+        # print("2. Nokta = " + str(
+        #    ccalc.find_second_point(self.coordinateList[0][1], self.checkpoints[0][0], self.coordinateList[1][1],
+        #                            self.coordinateList[1][2])))
 
     @staticmethod
     def find_checkpoints(coordinates):
         temp_list = []
         checkpoint_distance = 1
         j = 0
-        checkpoint = coordinates[0]
-        while j + 1 < len(coordinates):
-            if Calculator.haversine_algorithm(checkpoint, coordinates[j + 1]) >= checkpoint_distance:
-                checkpoint = Calculator.find_second_point(checkpoint,
-                                                          Calculator.calculate_bearing(checkpoint, coordinates[j + 1]),
-                                                          checkpoint_distance)
-                checkpoint.append(j)
+        checkpoint = coordinates[0].startPoint
+        while j < len(coordinates):
+            if calc.haversine_algorithm(checkpoint, coordinates[j].endPoint) >= checkpoint_distance:
+                checkpoint = calc.find_second_point(checkpoint,
+                                                    calc.calculate_bearing(checkpoint, coordinates[j].endPoint),
+                                                    checkpoint_distance)
                 checkpoint_distance = 1
                 temp_list.append(checkpoint)
             else:
-                checkpoint_distance = checkpoint_distance - Calculator.haversine_algorithm(checkpoint,
-                                                                                           coordinates[j + 1])
-                checkpoint = coordinates[j + 1]
+                checkpoint_distance = checkpoint_distance - calc.haversine_algorithm(checkpoint,
+                                                                                     coordinates[j].endPoint)
+                checkpoint = coordinates[j].endPoint
                 j = j + 1
         return temp_list
 
