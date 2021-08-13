@@ -1,9 +1,8 @@
 from os import path
 
 from ReadKml import *
-from Calculator import Calculator
+from Calculator import *
 from TypeConverter import *
-from CartesianCalculator import CartesianCalculator as ccalc
 from LineSegment import LineSegment
 
 
@@ -43,7 +42,9 @@ class Main:
             self.checkpoints.append(self.find_checkpoints(c))
         for ls in self.segmentList:
             for p in ls:
-                self.find_perpendicularSegment(p)
+                self.find_perpendicularSegments(p)
+        for ls in self.segmentList:
+            self.find_counterpartSegments(ls, self.segmentList)
 
     @staticmethod
     def find_checkpoints(coordinates):
@@ -68,12 +69,24 @@ class Main:
         return temp_list
 
     @staticmethod
-    def find_perpendicularSegment(lineSegment):
-        pointsList = Calculator.find_second_point(lineSegment)
+    def find_perpendicularSegments(lineSegment):
+        pointsList = Calculator.find_perpendicular_points(lineSegment)
         tempList = []
         for pl in pointsList:
             tempList.append(LineSegment(pl[0], pl[1]))
         lineSegment.perpendicularSegment = tempList
+
+    @staticmethod
+    def find_counterpartSegments(mainLine, segmentList):
+        for i in segmentList:
+            for j in mainLine:
+                if i[0].startPoint != j.startPoint:
+                    for k in j.perpendicularSegment:
+                        for segment in i:
+                            if IntersectionControl.doIntersect(k, segment):
+                                j.counterpartSegments.append(segment)
+                else:
+                    break
 
 
 if __name__ == "__main__":

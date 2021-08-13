@@ -53,17 +53,16 @@ class Calculator:
 
     @staticmethod
     def cross_track_distance(startPoint, endPoint, checkpoint):
-
         startToCheckpointD = Calculator.haversine_algorithm(startPoint, checkpoint) / Calculator.WORLD_RADIUS
         startToCheckpointB = math.radians(Calculator.calculate_bearing(startPoint, checkpoint))
         startToEndB = math.radians(Calculator.calculate_bearing(startPoint, endPoint))
 
         distance = abs(math.asin(math.sin(startToCheckpointD) * math.sin(startToCheckpointB - startToEndB)))
 
-        return distance * Calculator.WORLD_RADIUS*1000
+        return distance * Calculator.WORLD_RADIUS * 1000
 
     @staticmethod
-    def find_second_point(lineSegment):
+    def find_perpendicular_points(lineSegment):
         rotatedSegments = []
         longtitude_distance = ((2 * math.pi * Calculator.WORLD_RADIUS) * math.cos(
             math.radians(lineSegment.startPoint[1]))) / 360
@@ -77,3 +76,57 @@ class Calculator:
             rotatedSegments.append([rotatedby270, rotatedby90])
 
         return rotatedSegments
+
+
+class IntersectionControl:
+
+    @staticmethod
+    def onSegment(p, q, r):
+        if ((q.x <= max(p[0], r[0])) and (q.x >= min(p[0], r[0])) and
+                (q[1] <= max([1], r[1])) and (q[1] >= min(p[1], r[1]))):
+            return True
+        return False
+
+    @staticmethod
+    def orientation(p, q, r):
+        val = (float(q[1] - p[1]) * (r[0] - q[0])) - (float(q[0] - p[0]) * (r[1] - q[1]))
+        if val > 0:
+
+            return 1
+        elif val < 0:
+
+            return 2
+        else:
+
+            return 0
+
+    @staticmethod
+    def doIntersect(mainSegment, secondSegment):
+        longtitude_distance = ((2 * math.pi * Calculator.WORLD_RADIUS) * math.cos(
+            math.radians(mainSegment.startPoint[1]))) / 360
+        p1 = (mainSegment.startPoint[0]*longtitude_distance,mainSegment.startPoint[1]*111)
+        q1 = (mainSegment.endPoint[0] * longtitude_distance, mainSegment.endPoint[1] * 111)
+        p2 = (secondSegment.startPoint[0] * longtitude_distance, secondSegment.startPoint[1] * 111)
+        q2 = (secondSegment.endPoint[0] * longtitude_distance, secondSegment.endPoint[1] * 111)
+
+        o1 = IntersectionControl.orientation(p1, q1, p2)
+        o2 = IntersectionControl.orientation(p1, q1, q2)
+        o3 = IntersectionControl.orientation(p2, q2, p1)
+        o4 = IntersectionControl.orientation(p2, q2, q1)
+
+        if (o1 != o2) and (o3 != o4):
+            return True
+
+        if (o1 == 0) and IntersectionControl.onSegment(p1, p2, q1):
+            return True
+
+        if (o2 == 0) and IntersectionControl.onSegment(p1, q2, q1):
+            return True
+
+        if (o3 == 0) and IntersectionControl.onSegment(p2, p1, q2):
+            return True
+
+        if (o4 == 0) and IntersectionControl.onSegment(p2, q1, q2):
+            return True
+
+        return False

@@ -1,5 +1,4 @@
 from Calculator import Calculator as calc
-from CartesianCalculator import CartesianCalculator as cc
 
 
 class LineSegment:
@@ -13,5 +12,5 @@ class LineSegment:
         self.bearing = calc.calculate_bearing(startPoint, endPoint)
         self.checkpoints = []
         self.perpendicularSegment = []
-
+        self.counterpartSegments = []
 
