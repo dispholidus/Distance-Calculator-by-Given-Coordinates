@@ -64,13 +64,16 @@ class Calculator:
 
     @staticmethod
     def find_second_point(lineSegment):
-        rotatedPoints = []
+        rotatedSegments = []
         longtitude_distance = ((2 * math.pi * Calculator.WORLD_RADIUS) * math.cos(
             math.radians(lineSegment.startPoint[1]))) / 360
         for cp in lineSegment.checkpoints:
             tempPoint = Calculator.findcheckpoint(cp, lineSegment.bearing, 1)
             x = abs(tempPoint[0] - cp[0]) * longtitude_distance
             y = abs(tempPoint[1] - cp[1]) * 111
-            rotatedPoint = [cp[0] + y / longtitude_distance, cp[1] - x / 111]
-            rotatedPoints.append(rotatedPoint)
+            rotatedby90 = [cp[0] + y / longtitude_distance, cp[1] - x / 111]
+            rotatedby270 = [cp[0] - y / longtitude_distance, cp[1] + x / 111]
 
+            rotatedSegments.append([rotatedby270, rotatedby90])
+
+        return rotatedSegments

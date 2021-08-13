@@ -1,7 +1,7 @@
 from os import path
 
 from ReadKml import *
-from Calculator import Calculator as calc
+from Calculator import Calculator
 from TypeConverter import *
 from CartesianCalculator import CartesianCalculator as ccalc
 from LineSegment import LineSegment
@@ -28,7 +28,8 @@ class Main:
         for k in self.kml_files:
             self.roots.append(ReadKml.read(k))
         for r in self.roots:
-            self.coordinateList.append(TypeConverter.stringListtoFloatList(str(r.Document.Placemark.MultiGeometry.LineString.coordinates).split(" ")))
+            self.coordinateList.append(TypeConverter.stringListtoFloatList(
+                str(r.Document.Placemark.MultiGeometry.LineString.coordinates).split(" ")))
         for c in self.coordinateList:
             tempList = []
             for index, elem in enumerate(c):
@@ -40,6 +41,9 @@ class Main:
             self.segmentList.append(tempList)
         for c in self.segmentList:
             self.checkpoints.append(self.find_checkpoints(c))
+        for ls in self.segmentList:
+            for p in ls:
+                self.find_perpendicularSegment(p)
 
     @staticmethod
     def find_checkpoints(coordinates):
@@ -48,19 +52,28 @@ class Main:
         j = 0
         checkpoint = coordinates[0].startPoint
         while j < len(coordinates):
-            if calc.haversine_algorithm(checkpoint, coordinates[j].endPoint) >= checkpoint_distance:
-                checkpoint = calc.findcheckpoint(checkpoint,
-                                                 calc.calculate_bearing(checkpoint, coordinates[j].endPoint),
-                                                 checkpoint_distance)
+            if Calculator.haversine_algorithm(checkpoint, coordinates[j].endPoint) >= checkpoint_distance:
+                checkpoint = Calculator.findcheckpoint(checkpoint,
+                                                       Calculator.calculate_bearing(checkpoint,
+                                                                                    coordinates[j].endPoint),
+                                                       checkpoint_distance)
                 checkpoint_distance = 1
                 coordinates[j].checkpoints.append(checkpoint)
                 temp_list.append(checkpoint)
             else:
-                checkpoint_distance = checkpoint_distance - calc.haversine_algorithm(checkpoint,
-                                                                                     coordinates[j].endPoint)
+                checkpoint_distance = checkpoint_distance - Calculator.haversine_algorithm(checkpoint,
+                                                                                           coordinates[j].endPoint)
                 checkpoint = coordinates[j].endPoint
                 j = j + 1
         return temp_list
+
+    @staticmethod
+    def find_perpendicularSegment(lineSegment):
+        pointsList = Calculator.find_second_point(lineSegment)
+        tempList = []
+        for pl in pointsList:
+            tempList.append(LineSegment(pl[0], pl[1]))
+        lineSegment.perpendicularSegment = tempList
 
 
 if __name__ == "__main__":

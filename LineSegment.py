@@ -12,5 +12,6 @@ class LineSegment:
         self.length = calc.haversine_algorithm(startPoint, endPoint)
         self.bearing = calc.calculate_bearing(startPoint, endPoint)
         self.checkpoints = []
+        self.perpendicularSegment = []
 
 
