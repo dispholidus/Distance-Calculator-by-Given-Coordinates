@@ -45,6 +45,7 @@ class Main:
                 self.find_perpendicularSegments(p)
         for ls in self.segmentList:
             self.find_counterpartSegments(ls, self.segmentList)
+        
 
     @staticmethod
     def find_checkpoints(coordinates):
@@ -81,10 +82,14 @@ class Main:
         for i in segmentList:
             for j in mainLine:
                 if i[0].startPoint != j.startPoint:
+                    tempList = []
                     for k in j.perpendicularSegment:
+
                         for segment in i:
                             if IntersectionControl.doIntersect(k, segment):
-                                j.counterpartSegments.append(segment)
+                                tempList.append(segment)
+                                break
+                    j.counterpartSegments.append(tempList)
                 else:
                     break
 

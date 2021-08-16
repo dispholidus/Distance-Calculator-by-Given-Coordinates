@@ -104,7 +104,7 @@ class IntersectionControl:
     def doIntersect(mainSegment, secondSegment):
         longtitude_distance = ((2 * math.pi * Calculator.WORLD_RADIUS) * math.cos(
             math.radians(mainSegment.startPoint[1]))) / 360
-        p1 = (mainSegment.startPoint[0]*longtitude_distance,mainSegment.startPoint[1]*111)
+        p1 = (mainSegment.startPoint[0] * longtitude_distance, mainSegment.startPoint[1] * 111)
         q1 = (mainSegment.endPoint[0] * longtitude_distance, mainSegment.endPoint[1] * 111)
         p2 = (secondSegment.startPoint[0] * longtitude_distance, secondSegment.startPoint[1] * 111)
         q2 = (secondSegment.endPoint[0] * longtitude_distance, secondSegment.endPoint[1] * 111)
@@ -130,3 +130,43 @@ class IntersectionControl:
             return True
 
         return False
+
+    @staticmethod
+    def findIntersectionPoint(segment1, segment2):
+        y1 = math.radians(segment1.startPoint[1])
+        x1 = math.radians(segment1.startPoint[0])
+        y2 = math.radians(segment2.startPoint[1])
+        x2 = math.radians(segment2.startPoint[0])
+        brng1 = math.radians(segment1.bearing)
+        brng2 = math.radians(segment2.bearing)
+        deltaY = y2 - y1
+        deltaX = x2 - x1
+
+        angularDistance = 2 * math.asin(math.sqrt(math.sin(deltaY / 2) * math.sin(deltaY / 2) + math.cos(y1) * math.cos(y2) * math.sin(deltaX / 2) * math.sin(deltaX / 2)))
+
+        cosTetaA = (math.sin(y2) - math.sin(y1) * math.cos(angularDistance)) / (math.sin(angularDistance) * math.cos(y1))
+        cosTetaB = (math.sin(y1) - math.sin(y2) * math.cos(angularDistance)) / (math.sin(angularDistance) * math.cos(y2))
+        tetaA = math.acos(min(max(cosTetaA, -1), 1))
+        tetaB = math.acos(min(max(cosTetaB, -1), 1))
+
+        if math.sin(x2 - x1) > 0:
+            teta12 = tetaA
+            teta21 = 2 * math.pi - tetaB
+        elif math.sin(x2-x1) < 0:
+            teta12 = 2 * math.pi - tetaA
+            teta21 = tetaB
+
+        alfa1 = brng1 - teta12
+        alfa2 = teta21 - brng2
+
+        cosAlfa3 = -math.cos(alfa1) * math.cos(alfa2) + math.sin(alfa1) * math.sin(alfa2) * math.cos(angularDistance)
+
+        deltaY13 = math.atan2(math.sin(angularDistance) * math.sin(alfa1) * math.sin(alfa2), math.cos(alfa2) + math.cos(alfa1) * cosAlfa3)
+        y3 = math.asin(min(max(math.sin(y1) * math.cos(deltaY13) + math.cos(y1) * math.sin(deltaY13) * math.cos(brng1), -1), 1))
+
+        deltaX13 = math.atan2(math.sin(brng1) * math.sin(deltaY13) * math.cos(y1), math.cos(deltaY13) - math.sin(y1) * math.sin(y3))
+        x3 = x1 + deltaX13
+
+        intersectionPoint = [math.degrees(x3), math.degrees(y3)]
+
+        return intersectionPoint
