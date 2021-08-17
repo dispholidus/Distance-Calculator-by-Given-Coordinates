@@ -4,6 +4,8 @@ from ReadKml import *
 from Calculator import *
 from TypeConverter import *
 from LineSegment import LineSegment
+import xlsxwriter
+import pandas as pd
 
 
 class Main:
@@ -15,10 +17,12 @@ class Main:
     coordinateList = []
     segmentList = []
     checkpoints = []
+    counterPoints = []
+    lineNames = []
 
     def __init__(self):
-        self.kml_files.append(path.join("KMLDosyaları/Hat_380kV_GELIBOLU 380 - UNIMAR KUZEY.kml"))
-        self.kml_files.append(path.join("KMLDosyaları/Hat_380kV_GELIBOLU 380 - UNIMAR GUNEY(1).kml"))
+        self.kml_files.append(path.join("input/Hat_380kV_GELIBOLU 380 - UNIMAR KUZEY.kml"))
+        self.kml_files.append(path.join("input/Hat_380kV_GELIBOLU 380 - UNIMAR GUNEY(1).kml"))
 
     def main(self):
         # kml dosyalarının içine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" eklemeyi unutma
@@ -27,13 +31,17 @@ class Main:
         for k in self.kml_files:
             self.roots.append(ReadKml.read(k))
         for r in self.roots:
+            lineName = str(r.Document.name)
+            lineName = lineName.replace("(1)", "").replace(".kml", "").replace("Hat", "").replace("-", " ").replace("_", "").replace("380kV", "").replace("   ", " ")
+            self.lineNames.append(lineName)
+        for r in self.roots:
             self.coordinateList.append(TypeConverter.stringListtoFloatList(
                 str(r.Document.Placemark.MultiGeometry.LineString.coordinates).split(" ")))
         for c in self.coordinateList:
             tempList = []
             for index, elem in enumerate(c):
                 if index + 1 < len(c):
-                    thisElem = c[index]
+                    thisElem = elem
                     nextElem = c[index + 1]
                     obj = LineSegment(thisElem, nextElem)
                     tempList.append(obj)
@@ -45,7 +53,8 @@ class Main:
                 self.find_perpendicularSegments(p)
         for ls in self.segmentList:
             self.find_counterpartSegments(ls, self.segmentList)
-        
+        for index, line in enumerate(self.segmentList):
+            self.find_distances(line, index)
 
     @staticmethod
     def find_checkpoints(coordinates):
@@ -92,6 +101,49 @@ class Main:
                     j.counterpartSegments.append(tempList)
                 else:
                     break
+
+    @staticmethod
+    def find_counter_points(segment):
+        final_temp_list = []
+        for css in segment.counterpartSegments:
+            temp_list = []
+            for index, cs in enumerate(css):
+                ps = segment.perpendicularSegment[index]
+                temp_list.append(IntersectionControl.findIntersectionPoint(ps, cs))
+            final_temp_list.append(temp_list)
+        return final_temp_list
+
+    def find_distances(self, mainLine, index):
+        distance_dict = {}
+        counterpoint_dict = {}
+        counter = 0
+        for ind, elem in enumerate(self.lineNames):
+            if ind != index:
+                distance_dict[elem] = []
+                counterpoint_dict[counter] = []
+                counter = counter + 1
+        for segment in mainLine:
+            for cpsIndex, cps in enumerate(segment.counterpartSegments):
+                for spIndex, elem in enumerate(segment.perpendicularSegment):
+                    if len(cps) != 0:
+                        counterpoint_dict[cpsIndex].append(IntersectionControl.findIntersectionPoint(elem, cps[spIndex]))
+        counter = 0
+        for nameIndex, elem in enumerate(self.lineNames):
+            temp_list = []
+            if nameIndex != index:
+                for cpIndex, cp in enumerate(counterpoint_dict[counter]):
+                    temp_list.append(Calculator.haversine_algorithm(cp, self.checkpoints[index][cpIndex]) * 1000)
+                distance_dict[elem] = temp_list
+                counter = counter + 1
+                if distance_dict[elem] is None:
+                    del distance_dict[elem]
+        self.output_to_excell(index, distance_dict)
+
+    def output_to_excell(self, index, distance_dict):
+        file_name = "./output/" + self.lineNames[index] + ".xlsx"
+        df = pd.DataFrame.from_dict(distance_dict, orient='index')
+        df = df.transpose()
+        df.to_excel(file_name, index=False)
 
 
 if __name__ == "__main__":
