@@ -23,6 +23,12 @@ class Main:
     def __init__(self):
         self.kml_files.append(path.join("input/Hat_380kV_GELIBOLU 380 - UNIMAR KUZEY.kml"))
         self.kml_files.append(path.join("input/Hat_380kV_GELIBOLU 380 - UNIMAR GUNEY(1).kml"))
+        self.kml_files.append(path.join("input/Hat_380kV_CORLU 380-HADIMKOY GIS(1).kml"))
+        self.kml_files.append(path.join("input/Hat_380kV_CORLU 380-HADIMKOY GIS.kml"))
+        self.kml_files.append(path.join("input/Hat_380kV_UNIMAR - HABIBLER(1).kml"))
+        self.kml_files.append(path.join("input/Hat_380kV_UNIMAR - HABIBLER.kml"))
+        self.kml_files.append(path.join("input/Hat_380kV_UNIMAR - IKITELLI(1).kml"))
+        self.kml_files.append(path.join("input/Hat_380kV_UNIMAR - IKITELLI.kml"))
 
     def main(self):
         # kml dosyalarının içine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" eklemeyi unutma
@@ -32,7 +38,8 @@ class Main:
             self.roots.append(ReadKml.read(k))
         for r in self.roots:
             lineName = str(r.Document.name)
-            lineName = lineName.replace("(1)", "").replace(".kml", "").replace("Hat", "").replace("-", " ").replace("_", "").replace("380kV", "").replace("   ", " ")
+            lineName = lineName.replace(".kml", "").replace("Hat", "").replace("-", " ").replace("_", "").replace(
+                "380kV", "").replace("   ", " ")
             self.lineNames.append(lineName)
         for r in self.roots:
             self.coordinateList.append(TypeConverter.stringListtoFloatList(
@@ -93,25 +100,17 @@ class Main:
                 if i[0].startPoint != j.startPoint:
                     tempList = []
                     for k in j.perpendicularSegment:
-
+                        isFilled = False
                         for segment in i:
                             if IntersectionControl.doIntersect(k, segment):
+                                isFilled = True
                                 tempList.append(segment)
                                 break
+                        if not isFilled:
+                            tempList.append(0)
                     j.counterpartSegments.append(tempList)
                 else:
                     break
-
-    @staticmethod
-    def find_counter_points(segment):
-        final_temp_list = []
-        for css in segment.counterpartSegments:
-            temp_list = []
-            for index, cs in enumerate(css):
-                ps = segment.perpendicularSegment[index]
-                temp_list.append(IntersectionControl.findIntersectionPoint(ps, cs))
-            final_temp_list.append(temp_list)
-        return final_temp_list
 
     def find_distances(self, mainLine, index):
         distance_dict = {}
@@ -126,17 +125,21 @@ class Main:
             for cpsIndex, cps in enumerate(segment.counterpartSegments):
                 for spIndex, elem in enumerate(segment.perpendicularSegment):
                     if len(cps) != 0:
-                        counterpoint_dict[cpsIndex].append(IntersectionControl.findIntersectionPoint(elem, cps[spIndex]))
+                        if cps[spIndex] == 0:
+                            counterpoint_dict[cpsIndex].append(0)
+                        else:
+                            counterpoint_dict[cpsIndex].append(IntersectionControl.findIntersectionPoint(elem, cps[spIndex]))
         counter = 0
         for nameIndex, elem in enumerate(self.lineNames):
             temp_list = []
             if nameIndex != index:
                 for cpIndex, cp in enumerate(counterpoint_dict[counter]):
-                    temp_list.append(Calculator.haversine_algorithm(cp, self.checkpoints[index][cpIndex]) * 1000)
+                    if cp != 0:
+                        temp_list.append(round((Calculator.haversine_algorithm(cp, self.checkpoints[index][cpIndex]) * 1000), 2))
+                    else:
+                        temp_list.append("-")
                 distance_dict[elem] = temp_list
                 counter = counter + 1
-                if distance_dict[elem] is None:
-                    del distance_dict[elem]
         self.output_to_excell(index, distance_dict)
 
     def output_to_excell(self, index, distance_dict):

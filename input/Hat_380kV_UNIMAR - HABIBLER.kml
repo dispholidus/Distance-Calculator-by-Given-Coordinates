@@ -2,6 +2,16 @@
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <Document>
 	<name>Hat_380kV_UNIMAR - HABIBLER.kml</name>
+	<StyleMap id="default">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#default0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#hl</styleUrl>
+		</Pair>
+	</StyleMap>
 	<Style id="default0">
 		<LineStyle>
 			<color>ff0000ff</color>
@@ -17,16 +27,6 @@
 			<width>3</width>
 		</LineStyle>
 	</Style>
-	<StyleMap id="default">
-		<Pair>
-			<key>normal</key>
-			<styleUrl>#default0</styleUrl>
-		</Pair>
-		<Pair>
-			<key>highlight</key>
-			<styleUrl>#hl</styleUrl>
-		</Pair>
-	</StyleMap>
 	<Placemark id="Hat.fid-32a11066_16f47389167_1381" xsi:schemaLocation="http://www.opengis.net/kml/2.2 https://developers.google.com/kml/schema/kml22gx.xsd">
 		<name>Hat_380kV_UNIMAR - HABIBLER.kml</name>
 		<styleUrl>#default</styleUrl>
