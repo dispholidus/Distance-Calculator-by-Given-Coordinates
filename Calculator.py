@@ -88,13 +88,20 @@ class IntersectionControl:
         return False
 
     @staticmethod
-    def orientation(p, q, r):
+    def orientation(p, q, r, flag):
+        if flag:
+            longtitude_distance = ((2 * math.pi * Calculator.WORLD_RADIUS) * math.cos(
+                math.radians(p[1]))) / 360
+            p = [p[0]*longtitude_distance, p[1] * 111]
+            q = [q[0] * longtitude_distance, q[1] * 111]
+            r = [r[0] * longtitude_distance, r[1] * 111]
+
         val = (float(q[1] - p[1]) * (r[0] - q[0])) - (float(q[0] - p[0]) * (r[1] - q[1]))
         if val > 0:
-
+            # saat yönünde
             return 1
         elif val < 0:
-
+            # saatin tersi yönünde
             return 2
         else:
 
@@ -109,10 +116,10 @@ class IntersectionControl:
         p2 = (secondSegment.startPoint[0] * longtitude_distance, secondSegment.startPoint[1] * 111)
         q2 = (secondSegment.endPoint[0] * longtitude_distance, secondSegment.endPoint[1] * 111)
 
-        o1 = IntersectionControl.orientation(p1, q1, p2)
-        o2 = IntersectionControl.orientation(p1, q1, q2)
-        o3 = IntersectionControl.orientation(p2, q2, p1)
-        o4 = IntersectionControl.orientation(p2, q2, q1)
+        o1 = IntersectionControl.orientation(p1, q1, p2, False)
+        o2 = IntersectionControl.orientation(p1, q1, q2, False)
+        o3 = IntersectionControl.orientation(p2, q2, p1, False)
+        o4 = IntersectionControl.orientation(p2, q2, q1, False)
 
         if (o1 != o2) and (o3 != o4):
             return True

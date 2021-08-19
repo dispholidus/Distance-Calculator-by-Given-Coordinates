@@ -128,14 +128,27 @@ class Main:
                         if cps[spIndex] == 0:
                             counterpoint_dict[cpsIndex].append(0)
                         else:
-                            counterpoint_dict[cpsIndex].append(IntersectionControl.findIntersectionPoint(elem, cps[spIndex]))
+                            if IntersectionControl.orientation(segment.startPoint, segment.checkpoints[spIndex], IntersectionControl.findIntersectionPoint(elem, cps[spIndex]), True) == 1:
+                                counterPoint = IntersectionControl.findIntersectionPoint(elem, cps[spIndex])
+                                counterPoint.append(0)
+                                print(counterPoint)
+                                counterpoint_dict[cpsIndex].append(counterPoint)
+                            elif IntersectionControl.orientation(segment.startPoint, segment.checkpoints[spIndex], IntersectionControl.findIntersectionPoint(elem, cps[spIndex]), True) == 2:
+                                counterPoint = IntersectionControl.findIntersectionPoint(elem, cps[spIndex])
+                                counterPoint.append(1)
+                                print(counterPoint)
+                                counterpoint_dict[cpsIndex].append(counterPoint)
+
         counter = 0
         for nameIndex, elem in enumerate(self.lineNames):
             temp_list = []
             if nameIndex != index:
                 for cpIndex, cp in enumerate(counterpoint_dict[counter]):
                     if cp != 0:
-                        temp_list.append(round((Calculator.haversine_algorithm(cp, self.checkpoints[index][cpIndex]) * 1000), 2))
+                        if cp[2] == 1:
+                            temp_list.append(round(0-(Calculator.haversine_algorithm(cp, self.checkpoints[index][cpIndex]) * 1000), 2))
+                        elif cp[2] == 0:
+                            temp_list.append(round((Calculator.haversine_algorithm(cp, self.checkpoints[index][cpIndex]) * 1000), 2))
                     else:
                         temp_list.append("-")
                 distance_dict[elem] = temp_list
