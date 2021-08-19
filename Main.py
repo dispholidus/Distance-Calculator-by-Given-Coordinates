@@ -131,12 +131,10 @@ class Main:
                             if IntersectionControl.orientation(segment.startPoint, segment.checkpoints[spIndex], IntersectionControl.findIntersectionPoint(elem, cps[spIndex]), True) == 1:
                                 counterPoint = IntersectionControl.findIntersectionPoint(elem, cps[spIndex])
                                 counterPoint.append(0)
-                                print(counterPoint)
                                 counterpoint_dict[cpsIndex].append(counterPoint)
                             elif IntersectionControl.orientation(segment.startPoint, segment.checkpoints[spIndex], IntersectionControl.findIntersectionPoint(elem, cps[spIndex]), True) == 2:
                                 counterPoint = IntersectionControl.findIntersectionPoint(elem, cps[spIndex])
                                 counterPoint.append(1)
-                                print(counterPoint)
                                 counterpoint_dict[cpsIndex].append(counterPoint)
 
         counter = 0
