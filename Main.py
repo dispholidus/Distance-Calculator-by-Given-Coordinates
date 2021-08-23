@@ -4,7 +4,6 @@ from ReadKml import *
 from Calculator import *
 from TypeConverter import *
 from LineSegment import LineSegment
-import xlsxwriter
 import pandas as pd
 
 
