@@ -11,8 +11,7 @@ class Calculator:
         deltaY = (point1[1] - point0[1]) * math.pi / 180
         deltaX = (point1[0] - point0[0]) * math.pi / 180
 
-        a = math.sin(deltaY / 2) * math.sin(deltaY / 2) + math.cos(y1) * math.cos(y2) * math.sin(deltaX / 2) * math.sin(
-            deltaX / 2)
+        a = math.sin(deltaY / 2) * math.sin(deltaY / 2) + math.cos(y1) * math.cos(y2) * math.sin(deltaX / 2) * math.sin(deltaX / 2)
         c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
         distance = Calculator.WORLD_RADIUS * c
@@ -50,16 +49,6 @@ class Calculator:
         second_point[1] = math.degrees(y1)
 
         return second_point
-
-    @staticmethod
-    def cross_track_distance(startPoint, endPoint, checkpoint):
-        startToCheckpointD = Calculator.haversine_algorithm(startPoint, checkpoint) / Calculator.WORLD_RADIUS
-        startToCheckpointB = math.radians(Calculator.calculate_bearing(startPoint, checkpoint))
-        startToEndB = math.radians(Calculator.calculate_bearing(startPoint, endPoint))
-
-        distance = abs(math.asin(math.sin(startToCheckpointD) * math.sin(startToCheckpointB - startToEndB)))
-
-        return distance * Calculator.WORLD_RADIUS * 1000
 
     @staticmethod
     def find_perpendicular_points(lineSegment):
@@ -103,7 +92,7 @@ class IntersectionControl:
             # saatin tersi yönünde
             return 2
         else:
-
+            # aynı doğrultu üzerindelerse
             return 0
 
     @staticmethod

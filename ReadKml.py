@@ -17,7 +17,8 @@ class ReadKml:
         f = open(file, mode="r", encoding="UTF-8")
         list_of_lines = f.readlines()
         secondLine = list_of_lines[1]
-        secondLine = re.sub(r'xmlns:atom="http://www.w3.org/2005/Atom">', 'xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">', secondLine, flags=re.IGNORECASE)
+        secondLine = re.sub(r'xmlns:atom="http://www.w3.org/2005/Atom">', 'xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">',
+                            secondLine, flags=re.IGNORECASE)
         list_of_lines[1] = secondLine
         f = open(file, mode="w", encoding="UTF-8")
         f.writelines(list_of_lines)
