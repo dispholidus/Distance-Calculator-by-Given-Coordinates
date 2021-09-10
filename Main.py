@@ -30,9 +30,6 @@ class Main:
         self.kml_files.append(path.join("input/Hat_380kV_UNIMAR - IKITELLI.kml"))
 
     def main(self):
-        # kml dosyalarının içine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" eklemeyi unutma
-        # kml dosyalarının kordinat kısmında ki tüm boşlukları sil
-
         for k in self.kml_files:
             self.roots.append(ReadKml.read(k))
         for r in self.roots:
@@ -54,7 +51,7 @@ class Main:
             self.segmentList.append(tempList)
         for c in self.segmentList:
             self.checkpoints.append(self.find_checkpoints(c))
-        self.calculate(1)
+        self.calculate(5)
 
     def calculate(self, index):
         line = self.segmentList[index]
