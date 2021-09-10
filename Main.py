@@ -54,13 +54,18 @@ class Main:
             self.segmentList.append(tempList)
         for c in self.segmentList:
             self.checkpoints.append(self.find_checkpoints(c))
-        for ls in self.segmentList:
-            for p in ls:
-                self.find_perpendicularSegments(p)
-        for ls in self.segmentList:
-            self.find_counterpartSegments(ls, self.segmentList)
-        for index, line in enumerate(self.segmentList):
-            self.find_distances(line, index)
+        self.calculate(1)
+
+    def calculate(self, index):
+        line = self.segmentList[index]
+        lineName = str(self.roots[index].Document.name)
+        lineName = lineName.replace(".kml", "").replace("Hat", "").replace("-", " ").replace("_", "").replace(
+            "380kV", "").replace("   ", " ")
+        self.lineNames.append(lineName)
+        for p in line:
+            self.find_perpendicularSegments(p)
+        self.find_counterpartSegments(line, self.segmentList)
+        self.find_distances(line, index)
 
     @staticmethod
     def find_checkpoints(coordinates):
